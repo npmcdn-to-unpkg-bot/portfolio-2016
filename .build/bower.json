@@ -1,0 +1,9 @@
+{
+  "name": "starter-framework",
+  "private": true,
+  "dependencies": {
+    "modernizr": "latest",
+    "zepto": "~1.1.6"
+  },
+  "devDependencies": {}
+}
