@@ -1,6 +1,29 @@
 *, *:before, *:after
 	box-sizing: border-box
 
+html, body
+	height: 100%
+	width: 100%
+
 img
 	max-width: 100%
 	display: block
+
+.site-container
+	display: flex
+	flex-direction: column
+	height: 100%
+
+header
+	display: flex
+	flex: 1
+	background: map-get($theme-colors, background-dark)
+	min-height: 100px
+main
+	display: flex
+	background: map-get($theme-colors, background-light)
+	flex: 10
+	height: 100%
+	@extend .row
+	section
+		flex: 1

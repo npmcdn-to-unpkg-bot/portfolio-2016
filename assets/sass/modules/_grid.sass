@@ -1,0 +1,28 @@
+.grid
+	background: map-get($theme-colors, abyss)
+	flex-grow: 1.5
+	max-height: 100vh
+	.container
+		height: 100%
+		max-height: 100vh
+		display: flex
+		flex-wrap: wrap
+		flex: 1
+		flex-direction: column
+	&__item
+		transition: all .35s map-get($transition, easeOutCirc)
+		display: flex
+		flex-basis: 33.33vh
+		width: 33.33%
+		background: map-get($theme-colors, abyss)
+		background-size: cover !important
+		transform: scale(.97)
+		&:hover
+			cursor: pointer
+			transform: scale(1.2)
+			z-index: 99
+			border: none
+			+shadow(5)
+		@for $i from 1 through 9
+			&:nth-child(#{$i})
+				background: url(../visual/images/min/grid-#{$i}.png) center center no-repeat

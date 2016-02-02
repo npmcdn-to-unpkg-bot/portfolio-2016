@@ -1,0 +1,40 @@
+.preview-pane
+	display: flex
+	display: flex
+	align-items: center
+	justify-content: center
+	position: relative
+	overflow: hidden
+
+	&--hello
+		// background: url(../visual/images/min/hello-bg.jpg) bottom center no-repeat
+		// background-size: cover
+		.bg 
+			position: absolute
+			bottom: -4%
+			left: 0
+			width: 110%
+			height: auto
+			z-index: 0
+			svg 
+				backface-visibility: hidden
+				perspective: 1000
+
+		h1
+			padding:
+				right: 20%
+				top: 15%
+			letter-spacing: rem(4px)
+			position: relative
+			font:
+				size: rem(32px)
+				family: map-get($typography, headline)
+				weight: 300
+			text-transform: uppercase
+			fill: url(#gradient-light)
+			text:nth-child(3)
+				font:
+					size: rem(60px)
+					weight: 900
+				letter-spacing: rem(2px)
+				z-index: 1

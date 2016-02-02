@@ -44,9 +44,14 @@ $fg-breakpoints: xs, (sm, 768px), (md, 992px), (lg, 1200px) !default
   @if $orientation == vertical
     #{$type}-top: $value
     #{$type}-bottom: $value
+  @if $orientation == horizontal
+    #{$type}-left: $value
+    #{$type}-right: $value
   @else
     #{$type}-left: $value
     #{$type}-right: $value
+    #{$type}-top: $value
+    #{$type}-bottom: $value
 
 //
 //Row wrapper class, flex box parent.
