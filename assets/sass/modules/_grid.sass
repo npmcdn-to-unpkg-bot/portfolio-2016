@@ -16,7 +16,22 @@
 		width: 33.33%
 		background: map-get($theme-colors, abyss)
 		background-size: cover !important
-		transform: scale(.97)
+		transform: scale(1)
+		border: 5px solid map-get($theme-colors, abyss)
+		&:nth-child(-n + 3) // first 3
+			border-left: 0
+		&:nth-child(3n +1) // top row
+			border-top: 0
+		&:nth-child(3n +2) // middle row
+			border:
+				top: 0
+				bottom: 0
+		&:nth-child(n+3):nth-child(-n + 6) //4-6
+			border:
+				left: 0 
+				right: 0
+		&:nth-child(3n +3) // bottom row
+			border-bottom: 0
 		&:hover
 			cursor: pointer
 			transform: scale(1.2)
