@@ -10,12 +10,13 @@
 		flex: 1
 		flex-direction: column
 	&__item
+		transition: all .35s map-get($transition, easeOutCirc)
 		display: flex
 		flex-basis: 33.33vh
 		width: 33.33%
 		background: map-get($theme-colors, abyss)
 		background-size: cover !important
-		z-index: 0
+		transform: scale(1)
 		border: 3px solid map-get($theme-colors, abyss)
 		&:nth-child(-n + 3) // first 3
 			border-left: 0
@@ -33,6 +34,10 @@
 			border-bottom: 0
 		&:hover
 			cursor: pointer
+			transform: scale(1.2)
+			z-index: 99
+			border: none
+			+shadow(5)
 		@for $i from 1 through 9
 			&:nth-child(#{$i})
 				background: url(../visual/images/min/grid-#{$i}.png) center center no-repeat
