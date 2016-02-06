@@ -1,7 +1,7 @@
 {
   "name": "starter-framework",
-  "version": "0.1.0",
-  "description": "noble studios starter framework",
+  "version": "1.0.0",
+  "description": "Noble Studios Starter Framework",
   "dependencies": {},
   "devDependencies": {
     "babelify": "^6.1.2",

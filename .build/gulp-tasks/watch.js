@@ -9,8 +9,9 @@ module.exports = function ( gulp, plugins ) {
   return function () {
     gulp.watch( paths.scripts, [ 'scripts' ] );
     gulp.watch( paths.styles, [ 'styles' ] );
-    gulp.watch( paths.icons, [ 'iconfont' ] );
+    gulp.watch( paths.icons, [ 'icons' ] );
     gulp.watch( paths.svgs, [ 'svgmin' ] );
     gulp.watch( paths.images, [ 'imagemin' ] );
+    gulp.watch( paths.templates, [ 'riot-tags' ] );
   };
 };

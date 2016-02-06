@@ -24,11 +24,11 @@ module.exports = function ( gulp, plugins ) {
               return { name: glyph.name, codepoint: glyph.unicode[ 0 ].charCodeAt( 0 ) };
             }),
             fontName: 'icons',
-            fontPath: paths.dist
+            fontPath: paths.distUrl
           }))
           .pipe( plugins.rename( '_icons.scss' ))
           .pipe( gulp.dest( paths.fonts ));
       })
-      .pipe( gulp.dest( paths.icons ));
+      .pipe( gulp.dest( paths.dist ));
   };
 };

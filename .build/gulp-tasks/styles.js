@@ -1,7 +1,7 @@
 // Pull in the global config file which has all the paths and other config bits
 // this thing uses
 var paths  = require( '../config' ).paths.styles;
-var notify = require( 'gulp-notify' );
+
 // Styles /////////////////////////////////////////////////////////////////////
 // Compile SASS styles and minimize.
 module.exports = function ( gulp, plugins ) {
@@ -9,7 +9,7 @@ module.exports = function ( gulp, plugins ) {
     return gulp.src( paths.sassMain )
       .pipe( plugins.sourcemaps.init() )
       .pipe( plugins.sass().on( 'error', function( err ) {
-        return notify().write(err);
+        return plugins.notify().write(err);
       }))
       .pipe( plugins.autoprefixer({
         browsers: [ 'last 3 versions' ],
