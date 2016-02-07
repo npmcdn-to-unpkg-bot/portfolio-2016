@@ -1,7 +1,7 @@
 var MainNav = {
 
 	settings: {
-		speed: .25,
+		speed: .35,
 		navItems: 'nav li',
 		toggleButton: $('.menu-button'),
 	},
@@ -17,15 +17,17 @@ var MainNav = {
 			MainNav.settings.speed, {
 				textIndent: 60,
 				ease: Back.easeOut.config(1.25)
-			}, .1);
+			}, .15);
 
 	},
 	
 	hide: function() {
 		$('body').addClass('js-is-page');
+
+		// Reverse nav stagger
 		TweenMax.staggerTo(
 			MainNav.settings.navItems,
-			MainNav.settings.speed/2, {
+			MainNav.settings.speed/1.5, {
 				textIndent: -400,
 				ease: Back.easeOut.config(1.25)
 			}, .075);

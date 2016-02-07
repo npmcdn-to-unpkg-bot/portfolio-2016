@@ -29,7 +29,7 @@
 var MainNav = {
 
 	settings: {
-		speed: .25,
+		speed: .35,
 		navItems: 'nav li',
 		toggleButton: $('.menu-button')
 	},
@@ -42,12 +42,14 @@ var MainNav = {
 		TweenMax.staggerTo(MainNav.settings.navItems, MainNav.settings.speed, {
 			textIndent: 60,
 			ease: Back.easeOut.config(1.25)
-		}, .1);
+		}, .15);
 	},
 
 	hide: function hide() {
 		$('body').addClass('js-is-page');
-		TweenMax.staggerTo(MainNav.settings.navItems, MainNav.settings.speed / 2, {
+
+		// Reverse nav stagger
+		TweenMax.staggerTo(MainNav.settings.navItems, MainNav.settings.speed / 1.5, {
 			textIndent: -400,
 			ease: Back.easeOut.config(1.25)
 		}, .075);
