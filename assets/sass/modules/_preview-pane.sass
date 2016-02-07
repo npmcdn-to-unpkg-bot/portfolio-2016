@@ -1,6 +1,5 @@
 .preview-pane
 	display: flex
-	display: flex
 	align-items: center
 	justify-content: center
 	position: relative
@@ -8,34 +7,45 @@
 	+shadow(5)
 	position: relative
 	z-index: 1
+	.blur-filter
+		display: none
 
 	&--hello
+		// .bg, .headline
+		// 	.js-is-page &
+		// 		filter: none
+		// 		display: block
 		.bg 
+			transition: all .1s
+			filter: url(../../index.html#blur)
 			position: absolute
-			bottom: -4%
-			left: 0
-			width: 110%
+			bottom: -20%
+			left: -20%
+			width: 140%
 			height: auto
 			z-index: 0
-			svg 
-				backface-visibility: hidden
-				perspective: 1000
+			.js-is-page &
+				filter: none
 
-		h1
+		.headline
+			transition: opacity .5s
 			padding:
 				right: 20%
 				top: 15%
 			letter-spacing: rem(4px)
 			position: relative
 			font:
-				size: rem(32px)
+				size: map-get($typography, size-med)
 				family: map-get($typography, headline)
 				weight: 300
 			text-transform: uppercase
 			fill: url(#gradient-light)
 			text:nth-child(3)
 				font:
-					size: rem(60px)
+					size: map-get($typography, size-jumbo)
 					weight: 900
 				letter-spacing: rem(2px)
 				z-index: 1
+			opacity: 0
+			.js-is-page &
+				opacity: 1

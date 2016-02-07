@@ -1,0 +1,18 @@
+nav li
+	transition: transform .35s map-get($transition, easeOutCirc), color .35s map-get($transition, easeOut)
+	font:
+		size: map-get($typography, size-jumbo)
+		family: map-get($typography, headline)
+		weight: 900
+	line-height: 2
+	color: white
+	text:
+		transform: uppercase
+		indent: -400px
+	&:hover, &.active
+		color: map-get($theme-colors, accent)
+
+	&:hover
+		transform: scale(1.5)
+		cursor: pointer
+

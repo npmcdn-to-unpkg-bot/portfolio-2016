@@ -5,13 +5,13 @@
 (function ($) {
   window.Portfolio = {};
 
-  // window.Portfolio.mainNav = require('./modules/mainNav');
+  window.Portfolio.mainNav = require('./modules/mainNav');
 
   //global ready function this should be the only time we call ready
   // this will loop through all the elements in the Portfolio and call
   // their load funcitons still needs some clean up but its working so yeah.
   //
-  // Thinking of doing somehting like this for resize or scrolling events
+  // Thinking of doing something like this for resize or scrolling events
   // so we have just one event that dispatches all the calls
   $(document).ready(function () {
 
@@ -22,5 +22,57 @@
     }
   });
 })(Zepto);
+
+},{"./modules/mainNav":2}],2:[function(require,module,exports){
+'use strict';
+
+var MainNav = {
+
+	settings: {
+		speed: .25,
+		navItems: 'nav li',
+		toggleButton: $('.menu-button')
+	},
+
+	show: function show() {
+
+		$('body').removeClass('js-is-page');
+
+		// Nav Item Stagger Effect
+		TweenMax.staggerTo(MainNav.settings.navItems, MainNav.settings.speed, {
+			textIndent: 60,
+			ease: Back.easeOut.config(1.25)
+		}, .1);
+	},
+
+	hide: function hide() {
+		$('body').addClass('js-is-page');
+		TweenMax.staggerTo(MainNav.settings.navItems, MainNav.settings.speed / 2, {
+			textIndent: -400,
+			ease: Back.easeOut.config(1.25)
+		}, .075);
+	},
+
+	toggleNav: function toggleNav() {},
+
+	bindEvents: function bindEvents() {
+		this.settings.toggleButton.on('click', function () {
+			if ($('body').hasClass('js-is-page')) {
+				MainNav.show();
+			} else {
+				MainNav.hide();
+			}
+		});
+	},
+
+	init: function init() {
+		this.bindEvents();
+	}
+
+};
+
+MainNav.init();
+
+module.exports = MainNav;
 
 },{}]},{},[1]);

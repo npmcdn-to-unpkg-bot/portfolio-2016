@@ -6,7 +6,9 @@ $grid: (
 
 $typography: (
   base-font-size: 18px,
-  headline: unquote("'Lato', 'sans-serif'")
+  headline: unquote("'Lato', 'sans-serif'"),
+  size-jumbo: rem(60px),
+  size-med: rem(32px)
 );
 
 $category-icons: (

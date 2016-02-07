@@ -18,8 +18,11 @@ img
 header
 	display: flex
 	flex: 1
-	background: map-get($theme-colors, background-dark)
-	min-height: 100px
+	height: 100%
+	position: fixed
+	flex-direction: column
+	z-index: 999
+	justify-content: center
 main
 	display: flex
 	background: map-get($theme-colors, background-light)

@@ -5,9 +5,9 @@
 	<title></title>
 	<link rel="stylesheet" href="assets/styles/application.min.css">
 </head>
-<body>
+<body class="js-is-page">
 <div class="site-container hello">
-	<div class="menu-button is-page">
+	<div class="menu-button">
 		<div class="menu-button__container">
 			<div class="bar bar--top"></div>
 			<div class="bar bar--middle"></div>
@@ -22,17 +22,25 @@
 			<span class="open">open</span>
 		</div>
 	  </div>
-	<!-- <header>
+	<header>
 		<nav>
 			<ul>
-				<li>Nav Item 1</li>
-				<li>Nav Item 2</li>
-				<li>Nav Item 3</li>
+				<li class="active">Hello</li>
+				<li>Work</li>
+				<li>Clients</li>
+				<li>Life</li>
 			</ul>
 		</nav>
-	</header> -->
+	</header>
 	<main>
 		<section class="preview-pane preview-pane--hello">
+			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="blur-filter">
+				<defs>
+					<filter id="blur">
+						<feGaussianBlur in="SourceGraphic" stdDeviation="50" />
+					</filter>
+				</defs>
+			</svg>
 			<div class="bg">
 				<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%"
 					 height="100%" viewBox="0 0 1160 1740.3" enable-background="new 0 0 1160 1740.3" xml:space="preserve">
@@ -51,33 +59,17 @@
 					</image>
 				</svg>
 
-				<!-- <defs>  
-				        <linearGradient id="logo-gradient" x1="50%" y1="0%" x2="50%" y2="100%" > 
-				            
-				            <stop offset="0%" stop-color="#7A5FFF">
-				                <animate attributeName="stop-color" values="#7A5FFF; #01FF89; #7A5FFF" dur="4s" repeatCount="indefinite"></animate>
-				            </stop>
-
-				            <stop offset="100%" stop-color="#01FF89">
-				                <animate attributeName="stop-color" values="#01FF89; #7A5FFF; #01FF89" dur="4s" repeatCount="indefinite"></animate>
-				            </stop>
-
-				        </linearGradient> 
-
-				    </defs> -->
 			</div>
-			<h1>
-				<svg class="headline" xmlns="http://www.w3.org/2000/svg">
-					<defs>
-						<linearGradient id="gradient-light" x1="0%" y1="0%" x2="0%" y2="100%">
-							<stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-							<stop offset="100%" style="stop-color:#dcdcdc;stop-opacity:1" />
-						</linearGradient>
-					</defs>
-					<text y="1.2em">digital</text>
-					<text y="1.6em">creative</text>
-				</svg>
-			</h1>
+			<svg class="headline" xmlns="http://www.w3.org/2000/svg">
+				<defs>
+					<linearGradient id="gradient-light" x1="0%" y1="0%" x2="0%" y2="100%">
+						<stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+						<stop offset="100%" style="stop-color:#dcdcdc;stop-opacity:1" />
+					</linearGradient>
+				</defs>
+				<text y="1.2em">digital</text>
+				<text y="1.6em">creative</text>
+			</svg>
 		</section>
 		<section class="grid">
 			<div class="container">
@@ -95,6 +87,6 @@
 	</main>
 </div>
 <script src="assets/scripts/dist/vendor.js"></script>
-<script src="assets/scripts/app/app.js"></script>
+<script src="assets/scripts/dist/app.js"></script>
 </body>
 </html>
