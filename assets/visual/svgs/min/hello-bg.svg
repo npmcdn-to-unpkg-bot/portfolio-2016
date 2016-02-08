@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1160" height="1740.3" viewBox="0 0 1160 1740.3">
+    <linearGradient id="a" gradientUnits="userSpaceOnUse" x1="1259.255" y1="466.537" x2="221.462" y2="898.451">
+        <stop offset=".035" stop-color="#bb9272"/>
+        <stop offset="1" stop-color="#6e646c"/>
+    </linearGradient>
+    <path fill="url(#a)" d="M0-238.9h1157.8v1977.3H0z"/>
+    <image overflow="visible" width="1160" height="773" xlink:href="../../images/min/hello-bg.png" transform="matrix(.998 0 0 .998 0 966.81)"/>
+</svg>

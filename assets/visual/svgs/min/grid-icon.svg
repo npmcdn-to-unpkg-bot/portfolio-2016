@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+	<symbol id="grid-icon">
+		<circle cx="50%" cy="50%"/>
+		<text id="aeText" y="50%" x="50%">
+			Ae
+		</text>
+		<defs>
+			<linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%" gradientTransform="rotate(45)">
+				<stop offset="0%" style="stop-color:red;" />
+				<stop offset="100%" style="stop-color:blue;" />
+			</linearGradient>
+		</defs>
+	</symbol>
+</svg>
