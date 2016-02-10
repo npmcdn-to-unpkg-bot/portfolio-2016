@@ -71,7 +71,28 @@
 		</section>
 		<section class="grid">
 			<div class="container">
-				<div class="grid__item"></div>
+				<div class="grid__item">
+				<!-- 
+				=============================================
+					@TODO
+					Fuck trying to get this shit to work
+					just make the below svg and image and 
+					then you can position it however
+				=============================================
+				 -->
+					<svg viewbox="0 0 300 200" preserveAspectRatio="xMidYMin">
+						<circle cx="50%" cy="50%"/>
+						<text id="aeText" y="50%" x="50%">
+							Ae
+						</text>
+						<defs>
+							<linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%" gradientTransform="rotate(45)">
+								<stop offset="0%" style="stop-color:red;" />
+								<stop offset="100%" style="stop-color:blue;" />
+							</linearGradient>
+						</defs>
+					</svg>
+				</div>
 				<div class="grid__item"></div>
 				<div class="grid__item"></div>
 				<div class="grid__item"></div>
@@ -84,6 +105,7 @@
 		</section>
 	</main>
 </div>
+
 <script src="assets/scripts/dist/vendor.js"></script>
 <script src="assets/scripts/dist/app.js"></script>
 </body>
