@@ -1,3 +1,9 @@
+// Object and methods for our main navigation
+// @returns public methods:
+// MainNav.show() - show nav items
+// MainNav.hide() - hide nav items
+// MainNav.toggle() - show/hide nav items
+
 var MainNav = (function() {
 
 	// Some configurable defaults
@@ -15,13 +21,21 @@ var MainNav = (function() {
 	// is looking at a page or a menu
 	// @private
 	// @returns Boolean
-	var _isPage = function() {
-		return $('body').hasClass('js-is-page') ? true : false
+	var isVisable = function() {
+		return $('body').hasClass('js-is-page');
 	}
 
 	// Sets the below methods as public
 	// @example MainNav.show()
 	return {
+
+		// A helper function to determine if the user
+		// is looking at a page or a menu
+		// @public
+		// @returns Boolean
+		isVisable: function() {
+			return !$('body').hasClass('js-is-page');
+		},
 
 		// Shows the nav items
 		// @public
@@ -36,7 +50,7 @@ var MainNav = (function() {
 			// @param {Object} css - The properites of the element to tween
 			// @param {Object} ease - Easing Properties built into Tweenmax
 			// @param {Number} delay - How many seconds before the next item 
-			// in the animation loop starts it's tween
+			// in the animation loop starts it's tween after previous has finished
 			TweenMax.staggerTo(
 				_settings.navItems,
 				_settings.speed, {
@@ -64,13 +78,15 @@ var MainNav = (function() {
 		// Hide or Show the Nav items
 		// @public
 		toggle: function() {
-			_isPage() ? this.show() : this.hide()
+			this.isVisable() ? this.hide() : this.show() 
 		},
 
 	}
 
 })();
 
+
+// Whoo! All that ^^ so we could do this.
 $('.menu-button').on('click', function () {
 	MainNav.toggle()
 })
