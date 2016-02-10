@@ -9,7 +9,7 @@
 
   //global ready function this should be the only time we call ready
   // this will loop through all the elements in the Portfolio and call
-  // their load funcitons still needs some clean up but its working so yeah.
+  // their load functions still needs some clean up but its working so yeah.
   //
   // Thinking of doing something like this for resize or scrolling events
   // so we have just one event that dispatches all the calls
@@ -26,54 +26,76 @@
 },{"./modules/mainNav":2}],2:[function(require,module,exports){
 'use strict';
 
-var MainNav = {
+var MainNav = (function () {
 
-	settings: {
+	// Some configurable defaults
+	// @private
+	var _settings = {
+
+		// This will be used to set our animation speed
 		speed: .35,
-		navItems: 'nav li',
-		toggleButton: $('.menu-button')
-	},
 
-	show: function show() {
+		// These are the elements in our navigation
+		navItems: 'nav li'
+	};
 
-		$('body').removeClass('js-is-page');
+	// A helper function to determine if the user
+	// is looking at a page or a menu
+	// @private
+	// @returns Boolean
+	var _isPage = function _isPage() {
+		return $('body').hasClass('js-is-page') ? true : false;
+	};
 
-		// Nav Item Stagger Effect
-		TweenMax.staggerTo(MainNav.settings.navItems, MainNav.settings.speed, {
-			textIndent: 60,
-			ease: Back.easeOut.config(1.25)
-		}, .15);
-	},
+	// Sets the below methods as public
+	// @example MainNav.show()
+	return {
 
-	hide: function hide() {
-		$('body').addClass('js-is-page');
+		// Shows the nav items
+		// @public
+		show: function show() {
 
-		// Reverse nav stagger
-		TweenMax.staggerTo(MainNav.settings.navItems, MainNav.settings.speed / 1.5, {
-			textIndent: -400,
-			ease: Back.easeOut.config(1.25)
-		}, .075);
-	},
+			$('body').removeClass('js-is-page');
 
-	toggleNav: function toggleNav() {},
+			// Stagger effect using the GSAP library
+			// @see https://greensock.com/tweenmax
+			// @param {Object || Array} element(s) - The element(s) to add tween to
+			// @param {Number} seconds - Over many seconds the tween lasts
+			// @param {Object} css - The properites of the element to tween
+			// @param {Object} ease - Easing Properties built into Tweenmax
+			// @param {Number} delay - How many seconds before the next item
+			// in the animation loop starts it's tween
+			TweenMax.staggerTo(_settings.navItems, _settings.speed, {
+				textIndent: 60,
+				ease: Back.easeOut.config(1.25)
+			}, .15);
+		},
 
-	bindEvents: function bindEvents() {
-		this.settings.toggleButton.on('click', function () {
-			if ($('body').hasClass('js-is-page')) {
-				MainNav.show();
-			} else {
-				MainNav.hide();
-			}
-		});
-	},
+		// Hides the nav items
+		// @public
+		hide: function hide() {
 
-	init: function init() {
-		this.bindEvents();
-	}
+			$('body').addClass('js-is-page');
 
-};
+			// Reverse nav stagger
+			TweenMax.staggerTo(_settings.navItems, _settings.speed / 1.5, {
+				textIndent: -400,
+				ease: Back.easeOut.config(1.25)
+			}, .075);
+		},
 
-MainNav.init();
+		// Hide or Show the Nav items
+		// @public
+		toggle: function toggle() {
+			_isPage() ? this.show() : this.hide();
+		}
+
+	};
+})();
+
+$('.menu-button').on('click', function () {
+	MainNav.toggle();
+});
 
 module.exports = MainNav;
 

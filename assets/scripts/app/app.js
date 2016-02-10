@@ -7,7 +7,7 @@
 
   //global ready function this should be the only time we call ready
   // this will loop through all the elements in the Portfolio and call
-  // their load funcitons still needs some clean up but its working so yeah.
+  // their load functions still needs some clean up but its working so yeah.
   // 
   // Thinking of doing something like this for resize or scrolling events
   // so we have just one event that dispatches all the calls
