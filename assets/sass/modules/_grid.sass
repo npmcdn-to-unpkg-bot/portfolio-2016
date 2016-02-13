@@ -1,5 +1,5 @@
 .grid
-	background: map-get($theme-colors, abyss)
+	background: map-get($theme-colors, abyss) url(../visual/svgs/min/logo.svg) center center no-repeat
 	flex-grow: 1.5
 	max-height: 100vh
 	.container
@@ -16,11 +16,13 @@
 		box-shadow: none
 		font-family: 'Aller'
 		text-align: center
-		line-height: 23.33vh
+		line-height: 19.33vh
 		font-size: 10vh
 		display: flex
 		align-items: center
 		justify-content: center
+		opacity: 0
+		transform: scale(.4)
 		svg 
 			width: 100%
 			height: 100%
@@ -32,16 +34,16 @@
 			font-weight: 900
 		&:hover
 			cursor: pointer
-			transform: scale(1.2)
+			transform: scale(1.2) !important //intial scale done with inline styles via js
 			z-index: 99
 			+shadow(5)
 		span
 			display: block
-			height: 25vh
-			width: 25vh
+			height: 20vh
+			width: 20vh
 			overflow: hidden
 			&:after
-				+long-shadow(text, rgba(0,0,0,.1), 280, false, true, right)
+				+long-shadow(text, rgba(0,0,0,.05), 280, false, true, right)
 		&:nth-child(1)
 			color: #25d4ff
 			background: url(../visual/images/min/grid-1.jpg) center center no-repeat
@@ -85,7 +87,7 @@
 					content: 'Ae'
 		&:nth-child(8)
 			color: #fff
-			background: #263238
+			background: #334e5b
 		&:nth-child(9)
 			color: #fff
 			background: #e44d26 url(../visual/svgs/min/icon-html5.svg) center center no-repeat, url(../visual/images/min/grid-9.jpg) center center no-repeat

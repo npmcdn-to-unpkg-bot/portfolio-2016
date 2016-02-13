@@ -1,11 +1,12 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 // main controller of the site
-"use strict";
+'use strict';
 
 (function ($) {
   window.Portfolio = {};
 
   window.Portfolio.mainNav = require('./modules/mainNav');
+  window.Portfolio.mainNav = require('./modules/grid');
 
   //global ready function this should be the only time we call ready
   // this will loop through all the elements in the Portfolio and call
@@ -23,7 +24,43 @@
   });
 })(Zepto);
 
-},{"./modules/mainNav":2}],2:[function(require,module,exports){
+},{"./modules/grid":2,"./modules/mainNav":3}],2:[function(require,module,exports){
+'use strict';
+
+var Grid = (function () {
+
+	var _settings = {
+		speed: .78,
+		gridItems: '.grid__item'
+	};
+
+	return {
+		show: function show() {
+
+			// Stagger effect using the GSAP library
+			// @see https://greensock.com/tweenmax
+			// @param {Object || Array} element(s) - The element(s) to add tween to
+			// @param {Number} seconds - Over many seconds the tween lasts
+			// @param {Object} css - The properites of the element to tween
+			// @param {Object} ease - Easing Properties built into Tweenmax
+			// @param {Number} delay - How many seconds before the next item
+			// in the animation loop starts it's tween after previous has finished
+			TweenMax.staggerTo(_settings.gridItems, _settings.speed, {
+				opacity: 1,
+				transform: 'scale(1)',
+				ease: Back.easeIn
+			}, .2);
+		}
+	};
+})();
+
+$(document).ready(function () {
+	Grid.show();
+});
+
+module.exports = Grid;
+
+},{}],3:[function(require,module,exports){
 // Object and methods for our main navigation
 // @returns public methods:
 // MainNav.show() - show nav items

@@ -3,6 +3,7 @@
   window.Portfolio = {};
 
   window.Portfolio.mainNav = require('./modules/mainNav');
+  window.Portfolio.mainNav = require('./modules/grid');
 
 
   //global ready function this should be the only time we call ready
