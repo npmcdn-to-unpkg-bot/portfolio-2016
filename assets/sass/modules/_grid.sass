@@ -1,5 +1,6 @@
 .grid
 	background: map-get($theme-colors, abyss) url(../visual/svgs/min/logo.svg) center center no-repeat
+	background-size: 30%
 	flex-grow: 1.5
 	max-height: 100vh
 	.container
@@ -63,7 +64,7 @@
 		&:nth-child(3)
 			color: #fff
 			background: #f7df1e url(../visual/svgs/min/icon-js.svg) center center no-repeat, url(../visual/images/min/grid-3.jpg) center center no-repeat
-			background-size: 50%, cover
+			background-size: 50%, cover // turns out you can do this with multiple background images, who woulda thought?
 		&:nth-child(4)
 			color: #ff7919
 			background: url(../visual/images/min/grid-4.jpg) center center no-repeat

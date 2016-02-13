@@ -25,16 +25,26 @@
 })(Zepto);
 
 },{"./modules/grid":2,"./modules/mainNav":3}],2:[function(require,module,exports){
+
+// Object and methods for our Grid
+// @returns public methods:
+// Grid.show() - show nav items
+// Grid.hide() - hide nav items
+// Grid.isAnimating() - check if grid is currently being animated
 'use strict';
 
 var Grid = (function () {
 
+	// Some default settings to get us going
 	var _settings = {
 		speed: .25,
 		gridItems: '.grid__item'
 	};
 
 	return {
+
+		//Show Grid items using a staggered effect
+		// @public
 		show: function show() {
 
 			// Stagger effect using the GSAP library
@@ -48,17 +58,44 @@ var Grid = (function () {
 			TweenMax.staggerTo(_settings.gridItems, _settings.speed, {
 				opacity: 1,
 				transform: 'scale(1)',
-				top: 0,
 				ease: Power4.easeIn
 			}, .08);
+		},
+
+		// Reverse the stagger effect
+		// @public
+		hide: function hide() {
+
+			// Stagger effect using the GSAP library
+			// @see https://greensock.com/tweenmax
+			// @param {Object || Array} element(s) - The element(s) to add tween to
+			// @param {Number} seconds - Over many seconds the tween lasts
+			// @param {Object} css - The properites of the element to tween
+			// @param {Object} ease - Easing Properties built into Tweenmax
+			// @param {Number} delay - How many seconds before the next item
+			// in the animation loop starts it's tween after previous has finished
+			TweenMax.staggerTo(_settings.gridItems, _settings.speed, {
+				opacity: 0,
+				transform: 'scale(.7)',
+				ease: Power4.easeIn
+			}, .08);
+		},
+
+		// Helper function to tell if grid is animating
+		// @public
+		isAnimating: function isAnimating() {
+			return Tweenmax.isTweening(_settings.gridItems);
 		}
 	};
 })();
 
-$(document).ready(function () {
-	setTimeout(function () {
-		Grid.show();
-	}, 500);
+// Show Grid once all images and background images have loaded
+// @see https://github.com/desandro/imagesloaded
+// @param {Array, Element, NodeList, String} elem
+// @param {Object or Function} options - if function, use as callback
+// @param {Function} onAlways - callback function
+imagesLoaded(document.querySelectorAll('.grid__item'), function () {
+	Grid.show();
 });
 
 module.exports = Grid;
@@ -69,7 +106,7 @@ module.exports = Grid;
 // MainNav.show() - show nav items
 // MainNav.hide() - hide nav items
 // MainNav.toggle() - show/hide nav items
-
+// MainNav.isAnimating() - Check if our main nav is currently animating
 'use strict';
 
 var MainNav = (function () {
@@ -125,6 +162,12 @@ var MainNav = (function () {
 			}, .15);
 		},
 
+		// Helper function to tell if the main nav is animating
+		// @public
+		isAnimating: function isAnimating() {
+			return Tweenmax.isTweening(_settings.navItems);
+		},
+
 		// Hides the nav items
 		// @public
 		hide: function hide() {
@@ -138,7 +181,7 @@ var MainNav = (function () {
 			}, .075);
 		},
 
-		// Hide or Show the Nav items
+		// Hide or Show the Nav items based on visibility
 		// @public
 		toggle: function toggle() {
 			this.isVisable() ? this.hide() : this.show();

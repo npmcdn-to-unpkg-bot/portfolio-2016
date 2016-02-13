@@ -3,7 +3,7 @@
 // MainNav.show() - show nav items
 // MainNav.hide() - hide nav items
 // MainNav.toggle() - show/hide nav items
-
+// MainNav.isAnimating() - Check if our main nav is currently animating
 var MainNav = (function() {
 
 	// Some configurable defaults
@@ -59,6 +59,12 @@ var MainNav = (function() {
 				}, .15);
 
 		},
+
+		// Helper function to tell if the main nav is animating
+		// @public
+		isAnimating: function() {
+			return Tweenmax.isTweening(_settings.navItems);
+		},
 		
 		// Hides the nav items
 		// @public
@@ -75,7 +81,7 @@ var MainNav = (function() {
 				}, .075);
 		},
 
-		// Hide or Show the Nav items
+		// Hide or Show the Nav items based on visibility
 		// @public
 		toggle: function() {
 			this.isVisable() ? this.hide() : this.show() 
