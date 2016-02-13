@@ -15,6 +15,13 @@
 		width: 33.33%
 		background-size: cover !important
 		box-shadow: none
+		font-family: 'Aller'
+		text-align: center
+		line-height: 23.33vh
+		font-size: 10vh
+		display: flex
+		align-items: center
+		justify-content: center
 		&:hover
 			cursor: pointer
 			transform: scale(1.2)
@@ -22,7 +29,34 @@
 			+shadow(5)
 		@for $i from 1 through 9
 			&:nth-child(#{$i})
-				// background: url(../visual/images/min/grid-#{$i}.png) center center no-repeat
-				background-color: darken(white, 5*$i)
+				background: url(../visual/images/min/grid-#{$i}.png) center center no-repeat
+				// background-color: darken(white, 5*$i)
+		span
+			display: block
+			height: 25vh
+			width: 25vh
+			overflow: hidden
+			&:after
+				+long-shadow(text, rgba(0,0,0,.1), 280, false, true, right)
 		&:nth-child(1)
-			@extend %grid-icon
+			color: #25d4ff
+			span
+				background: linear-gradient(#2e2e4d, #171732)
+				border-radius: 50%
+				&:after 
+					content: 'Ps'
+		&:nth-child(4)
+			color: #ff7919
+			span
+				background: linear-gradient(#3b2e22, #20100a)
+				border-radius: 50%
+				&:after 
+					content: 'Ai'
+		&:nth-child(7)
+			color: #d9b2ff
+			span
+				background: linear-gradient(#402f51, #1a1025)
+				border-radius: 50%
+				&:after 
+					content: 'Ae'
+
