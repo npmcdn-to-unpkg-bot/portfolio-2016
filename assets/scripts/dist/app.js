@@ -30,7 +30,7 @@
 var Grid = (function () {
 
 	var _settings = {
-		speed: .78,
+		speed: .25,
 		gridItems: '.grid__item'
 	};
 
@@ -48,14 +48,17 @@ var Grid = (function () {
 			TweenMax.staggerTo(_settings.gridItems, _settings.speed, {
 				opacity: 1,
 				transform: 'scale(1)',
-				ease: Back.easeIn
-			}, .2);
+				top: 0,
+				ease: Power4.easeIn
+			}, .08);
 		}
 	};
 })();
 
 $(document).ready(function () {
-	Grid.show();
+	setTimeout(function () {
+		Grid.show();
+	}, 500);
 });
 
 module.exports = Grid;

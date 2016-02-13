@@ -1,7 +1,7 @@
 var Grid = (function() {
 
 	var _settings = {
-		speed: .78,
+		speed: .25,
 		gridItems: '.grid__item'
 	}
 
@@ -21,8 +21,9 @@ var Grid = (function() {
 				_settings.speed, {
 					opacity: 1,
 					transform: 'scale(1)',
-					ease: Back.easeIn
-				}, .2);
+					top: 0,
+					ease: Power4.easeIn
+				}, .08);
 
 		}
 	}
@@ -31,7 +32,9 @@ var Grid = (function() {
 })();
 
 $(document).ready(function() {
-	Grid.show();
+	setTimeout(function(){
+		Grid.show();
+	}, 500)
 })
 
 module.exports = Grid;
