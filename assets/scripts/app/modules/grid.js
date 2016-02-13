@@ -68,13 +68,24 @@ var Grid = (function() {
 
 })();
 
+var gridItems = document.querySelectorAll('.grid__item');
+var observer = new FontFaceObserver('Aller');
+
+// check to see that our font-family has been loaded
+// @see https://github.com/bramstein/fontfaceobserver
+// Once loaded, check to see if our images have been loaded
+// Once image have been loaded we show our grid items
+observer.check().then(function(){
 	// Show Grid once all images and background images have loaded
 	// @see https://github.com/desandro/imagesloaded
 	// @param {Array, Element, NodeList, String} elem
 	// @param {Object or Function} options - if function, use as callback
 	// @param {Function} onAlways - callback function
-	imagesLoaded( document.querySelectorAll('.grid__item'), function() {
+	imagesLoaded( gridItems, function() {
 		Grid.show();
-	})
+	});
+});
+
+		
 
 module.exports = Grid;

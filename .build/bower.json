@@ -5,7 +5,8 @@
     "modernizr": "latest",
     "zepto": "~1.1.6",
     "gsap": "~1.18.2",
-    "imagesloaded": "~4.1.0"
+    "imagesloaded": "~4.1.0",
+    "fontfaceobserver": "~1.6.3"
   },
   "devDependencies": {}
 }
