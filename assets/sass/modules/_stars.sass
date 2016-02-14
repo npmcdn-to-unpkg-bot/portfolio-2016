@@ -1,0 +1,57 @@
+$stars-small:  makeStars(700)
+$stars-medium: makeStars(400)
+$stars-large:    makeStars(200)
+
+.star
+	position: absolute
+	top: 0
+	left: 0
+	&.\--small
+		width: 1px
+		height: 1px
+		background: transparent
+		box-shadow: $stars-small
+		animation: animStar 100s linear infinite
+		&:after
+			content: " "
+			position: absolute
+			top: 2000px
+			width: 1px
+			height: 1px
+			background: transparent
+			box-shadow: $stars-small
+	&.\--medium
+		width: 2px
+		height: 2px
+		background: transparent
+		box-shadow: $stars-medium
+		animation: animStar 200s linear infinite
+		&:after
+			content: " "
+			position: absolute
+			top: 2000px
+			width: 1px
+			height: 1px
+			background: transparent
+			box-shadow: $stars-medium
+	&.\--large
+		width: 3px
+		height: 3px
+		background: transparent
+		box-shadow: $stars-large
+		animation: animStar 300s linear infinite
+		&:after
+			content: " "
+			position: absolute
+			top: 2000px
+			width: 1px
+			height: 1px
+			background: transparent
+			box-shadow: $stars-large
+
+
+@keyframes animStar
+  from	
+    transform: translateY(-500px)
+  to		
+    transform: translateY(2000px)

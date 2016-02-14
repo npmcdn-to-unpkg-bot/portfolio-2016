@@ -73,3 +73,11 @@
   $color: rgba(black, nth(0.34 0.33 0.33 0.32 0.32, $depth))
   @return 0 $primary-offset $blur $color
 
+// Crea
+@function makeStars($n) 
+  $value: '#{random(2000)}px #{random(2000)}px #FFF'
+  @for $i from 2 through $n
+    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF'
+
+  @return unquote($value)
+
