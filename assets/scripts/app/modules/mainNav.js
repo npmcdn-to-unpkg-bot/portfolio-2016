@@ -90,11 +90,4 @@ var MainNav = (function() {
 	}
 
 })();
-
-
-// Whoo! All that ^^ so we could do this.
-$('.menu-button').on('click', function () {
-	MainNav.toggle()
-})
-
 module.exports = MainNav;

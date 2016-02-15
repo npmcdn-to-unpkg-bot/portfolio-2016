@@ -82,10 +82,9 @@ observer.check().then(function(){
 	// @param {Object or Function} options - if function, use as callback
 	// @param {Function} onAlways - callback function
 	imagesLoaded( gridItems, function() {
-		Grid.show();
+		Portfolio.grid.show();
 	});
 });
-
 		
 
 module.exports = Grid;
