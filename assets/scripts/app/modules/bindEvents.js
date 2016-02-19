@@ -10,9 +10,9 @@ var BindEvents = (function() {
 				if ( Portfolio.mainNav.isVisable() && !Portfolio.mainNav.isAnimating ) {
 					return
 				}
-				$('li.active').removeClass('active')
-				$(this).addClass('active')
-				Portfolio.mainNav.hide()
+				$('li.active').removeClass('active');
+				$(this).addClass('active');
+				Portfolio.mainNav.hide();
 				Portfolio.pane.updateView(event);
 			})
 

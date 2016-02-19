@@ -6,7 +6,8 @@
     "zepto": "~1.1.6",
     "gsap": "~1.18.2",
     "imagesloaded": "~4.1.0",
-    "fontfaceobserver": "~1.6.3"
+    "fontfaceobserver": "~1.6.3",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {}
 }

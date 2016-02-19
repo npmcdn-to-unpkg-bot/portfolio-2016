@@ -29,6 +29,7 @@
 				<li class="js-page-link" data-href="work.html">Work</li>
 				<li class="js-page-link" data-href="clients.html">Clients</li>
 				<li class="js-page-link" data-href="life.html">Life</li>
+				<li class="js-page-link" data-href="blog.html">Blog</li>
 			</ul>
 		</nav>
 	</header>
@@ -76,7 +77,8 @@
 		</section>
 		<section class="grid">
 			<div class="container">
-				<div class="grid__item"><span></span></div>
+
+				<!-- <div class="grid__item"><span></span></div>
 				<div class="grid__item">
 					<span>
 						<svg>
@@ -106,12 +108,51 @@
 							</text>
 					</span>
 				</div>
-				<div class="grid__item"><span></span></div>
+				<div class="grid__item"><span></span></div> -->
 			</div>
 		</section>
 	</main>
 </div>
+<script type="text/template" id="grid-template">
+	<% if(gridItems) { %>
+		<% _.each(gridItems, function(item) { %>
+			<% 
+			var classes, imagePath, styles;
 
+			if (item.image) {
+				classes = 'js-background-image';
+
+				if (item.image.type === 'svg') {
+					imagePath = 'assets/visual/svgs/min/';
+				} else {
+					imagePath = 'assets/visual/images/min/';
+				}
+			} 
+
+			
+
+			%>
+			<% if (item.color) { %>
+				<div class="grid__item <%= classes %>" style="background-color: <%= item.color %>;">
+			<% } else { %>
+				<div class="grid__item <%= classes %>">
+			<% } %>
+				<% if (item.image) { %>
+					<img src="<%= imagePath + item.image.name %>" alt="">
+				<% } %>
+				<span>
+					<% if (item.text) { %>
+						<svg>
+							<text y="50%" x="50%">
+								<%= item.text %>
+							</text>
+						</svg>
+					<% } %>
+				</span>
+			</div>
+		<% }) %>
+	<% } %>
+</script>
 <script src="assets/scripts/dist/vendor.js"></script>
 <script src="assets/scripts/dist/app.js"></script>
 </body>

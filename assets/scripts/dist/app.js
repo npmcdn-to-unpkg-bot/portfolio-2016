@@ -8,8 +8,8 @@
   window.Portfolio.mainNav = require('./modules/mainNav');
   window.Portfolio.grid = require('./modules/grid');
   window.Portfolio.pane = require('./modules/pane');
-
   window.Portfolio.bindEvents = require('./modules/bindEvents');
+  window.Portfolio.mainNav = require('./modules/background-image');
 
   //global ready function this should be the only time we call ready
   // this will loop through all the elements in the Portfolio and call
@@ -27,7 +27,60 @@
   });
 })(Zepto);
 
-},{"./modules/bindEvents":2,"./modules/grid":3,"./modules/mainNav":4,"./modules/pane":5}],2:[function(require,module,exports){
+},{"./modules/background-image":2,"./modules/bindEvents":3,"./modules/grid":4,"./modules/mainNav":5,"./modules/pane":6}],2:[function(require,module,exports){
+
+// Constructor for adding background images to
+// content blocks
+'use strict';
+
+var BackgroundImage = function BackgroundImage(element, $) {
+  this.$element = $(element);
+  this.$image = this.$element.find('img');
+
+  if (this.$image.length) {
+    // Check if image has already loaded and replace background immediately
+    if (this.imageComplete(this.$image[0])) {
+      this.replaceBackground();
+    }
+    // Otherwise wait for image load
+    this.$image.on('load', (function () {
+      this.replaceBackground();
+    }).bind(this));
+  }
+};
+
+// Adds/Replaces background image on the content block
+// from the hidden image picturefill loads.
+BackgroundImage.prototype.replaceBackground = function () {
+  var source = this.$image[0].currentSrc || this.$image[0].src;
+  this.$element.css({
+    'background-image': 'url(' + source + ')'
+  });
+};
+
+BackgroundImage.prototype.imageComplete = function (image) {
+  if (image.complete) {
+    return true;
+  }
+
+  // Or we can check the natural dimensions
+  if (typeof image.naturalWidth !== 'undefined' && image.naturalWidth > 0) {
+    return true;
+  }
+
+  // Guess not =[
+  return false;
+};
+
+BackgroundImage.prototype.load = function ($) {
+  $('.js-background-image').each(function () {
+    var backgroundImage = new BackgroundImage(this, $);
+  });
+};
+
+module.exports = BackgroundImage;
+
+},{}],3:[function(require,module,exports){
 'use strict';
 
 var BindEvents = (function () {
@@ -55,7 +108,7 @@ BindEvents.init();
 
 module.exports = BindEvents;
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 
 // Object and methods for our Grid
 // @returns public methods:
@@ -72,12 +125,47 @@ var Grid = (function () {
 		gridItems: '.grid__item'
 	};
 
+	var getData = function getData() {
+		$.ajax({
+			type: 'GET',
+			url: '/assets/scripts/app/data/gridData.json',
+			success: function success(data) {
+				// var page = Portfolio.getPage();
+				// var pageData;
+
+				if (data && data.gridItems) {
+					var compiledHTML = _.template($('#grid-template').html());
+				}
+
+				$('.grid .container').append(compiledHTML(data));
+
+				var gridItems = document.querySelectorAll('.grid__item');
+				var observer = new FontFaceObserver('Aller');
+
+				// check to see that our font-family has been loaded
+				// @see https://github.com/bramstein/fontfaceobserver
+				// Once loaded, check to see if our images have been loaded
+				// Once image have been loaded we show our grid items
+				observer.check().then(function () {
+					// Show Grid once all images and background images have loaded
+					// @see https://github.com/desandro/imagesloaded
+					// @param {Array, Element, NodeList, String} elem
+					// @param {Object or Function} options - if function, use as callback
+					// @param {Function} onAlways - callback function
+					imagesLoaded(gridItems, function () {
+						Grid.show();
+					});
+				});
+			}
+		});
+	};
+	getData();
+
 	return {
 
 		//Show Grid items using a staggered effect
 		// @public
 		show: function show() {
-
 			// Stagger effect using the GSAP library
 			// @see https://greensock.com/tweenmax
 			// @param {Object || Array} element(s) - The element(s) to add tween to
@@ -120,27 +208,9 @@ var Grid = (function () {
 	};
 })();
 
-var gridItems = document.querySelectorAll('.grid__item');
-var observer = new FontFaceObserver('Aller');
-
-// check to see that our font-family has been loaded
-// @see https://github.com/bramstein/fontfaceobserver
-// Once loaded, check to see if our images have been loaded
-// Once image have been loaded we show our grid items
-observer.check().then(function () {
-	// Show Grid once all images and background images have loaded
-	// @see https://github.com/desandro/imagesloaded
-	// @param {Array, Element, NodeList, String} elem
-	// @param {Object or Function} options - if function, use as callback
-	// @param {Function} onAlways - callback function
-	imagesLoaded(gridItems, function () {
-		Portfolio.grid.show();
-	});
-});
-
 module.exports = Grid;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 // Object and methods for our main navigation
 // @returns public methods:
 // MainNav.show() - show nav items
@@ -231,7 +301,7 @@ var MainNav = (function () {
 })();
 module.exports = MainNav;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 var Pane = (function () {
