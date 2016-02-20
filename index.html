@@ -77,63 +77,30 @@
 		</section>
 		<section class="grid">
 			<div class="container">
-
-				<!-- <div class="grid__item"><span></span></div>
-				<div class="grid__item">
-					<span>
-						<svg>
-							<text y="50%" x="50%">
-								UI
-							</text>
-						</svg>
-					</span>
-				</div>
-				<div class="grid__item"><span></span></div>
-				<div class="grid__item"><span></span></div>
-				<div class="grid__item">
-					<span>
-						<svg>
-							<text y="50%" x="50%">
-								UX
-							</text>
-					</span>
-				</div>
-				<div class="grid__item"><span></span></div>
-				<div class="grid__item"><span></span></div>
-				<div class="grid__item">
-					<span>
-						<svg>
-							<text y="50%" x="50%">
-								DEV
-							</text>
-					</span>
-				</div>
-				<div class="grid__item"><span></span></div> -->
 			</div>
 		</section>
 	</main>
 </div>
 <script type="text/template" id="grid-template">
-	<% if(gridItems) { %>
-		<% _.each(gridItems, function(item) { %>
-			<% 
+	<% 
+	if(gridItems) { 
+		_.each(gridItems, function(item) {
 			var classes, imagePath, styles;
 
 			if (item.image) {
 				classes = 'js-background-image';
 			} 
-			%>
-			<% if (item.color) { %>
+			if (item.color) { %>
 				<div class="grid__item <%= classes %>" style="background-color: <%= item.color %>;">
 			<% } else { %>
 				<div class="grid__item <%= classes %>">
-			<% } %>
-				<% if (item.image) { %>
-					<% _.each(item.image, function(img) { %>
+			<% } 
+				if (item.image) {
+					_.each(item.image, function(img) { %>
 						<img src="<%= img.path %>" alt="">
-					<% }) %>
+					<% }) 
 					
-				<% } %>
+				} %>
 				<span>
 					<% if (item.text) { %>
 						<svg>

@@ -66,8 +66,6 @@ BackgroundImage.prototype.replaceBackground = function () {
     img.remove();
   });
 
-  console.log(sources);
-
   that.$element.css({
     'background-image': sources
   });
