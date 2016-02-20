@@ -9,7 +9,7 @@
   window.Portfolio.grid = require('./modules/grid');
   window.Portfolio.pane = require('./modules/pane');
   window.Portfolio.bindEvents = require('./modules/bindEvents');
-  window.Portfolio.mainNav = require('./modules/background-image');
+  window.Portfolio.backgroundImage = require('./modules/background-image');
 
   //global ready function this should be the only time we call ready
   // this will loop through all the elements in the Portfolio and call
@@ -56,6 +56,7 @@ BackgroundImage.prototype.replaceBackground = function () {
   this.$element.css({
     'background-image': 'url(' + source + ')'
   });
+  this.$image.remove();
 };
 
 BackgroundImage.prototype.imageComplete = function (image) {
@@ -125,19 +126,35 @@ var Grid = (function () {
 		gridItems: '.grid__item'
 	};
 
-	var getData = function getData() {
-		$.ajax({
-			type: 'GET',
-			url: '/assets/scripts/app/data/gridData.json',
-			success: function success(data) {
-				// var page = Portfolio.getPage();
-				// var pageData;
+	return {
 
-				if (data && data.gridItems) {
+		load: function load(page) {
+
+			var getData = (function () {
+				$.ajax({
+					type: 'GET',
+					url: '/assets/scripts/app/data/gridData.json',
+					success: function success(data) {
+						setData(data, checkData);
+					}
+				});
+			})();
+
+			var setData = function setData(data, callback) {
+				if (data && data.pages[page].gridItems) {
 					var compiledHTML = _.template($('#grid-template').html());
 				}
 
-				$('.grid .container').append(compiledHTML(data));
+				$('.grid .container').append(compiledHTML(data.pages[page]));
+
+				callback();
+			};
+
+			var checkData = function checkData() {
+
+				$('.js-background-image').each(function () {
+					var backgroundImage = new Portfolio.backgroundImage(this, $);
+				});
 
 				var gridItems = document.querySelectorAll('.grid__item');
 				var observer = new FontFaceObserver('Aller');
@@ -156,12 +173,8 @@ var Grid = (function () {
 						Grid.show();
 					});
 				});
-			}
-		});
-	};
-	getData();
-
-	return {
+			};
+		},
 
 		//Show Grid items using a staggered effect
 		// @public
@@ -207,6 +220,7 @@ var Grid = (function () {
 		}
 	};
 })();
+Grid.load('hello');
 
 module.exports = Grid;
 

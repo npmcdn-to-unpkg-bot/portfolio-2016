@@ -6,8 +6,8 @@
   window.Portfolio.grid = require('./modules/grid');
   window.Portfolio.pane = require('./modules/pane');
   window.Portfolio.bindEvents = require('./modules/bindEvents');
-  window.Portfolio.mainNav = require('./modules/background-image');
-  
+  window.Portfolio.backgroundImage = require('./modules/background-image');
+
 
 
   //global ready function this should be the only time we call ready

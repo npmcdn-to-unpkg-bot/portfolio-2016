@@ -12,20 +12,38 @@ var Grid = (function() {
 		gridItems: '.grid__item'
 	}
 
-	var getData = function() {
-		$.ajax({
-			type: 'GET',
-			url: '/assets/scripts/app/data/gridData.json',
-			success: function(data) {
-				// var page = Portfolio.getPage();
-				// var pageData;
 
-				if (data && data.gridItems) {
+
+	return {
+
+		load: function(page) {
+
+			var getData = (function() {
+				$.ajax({
+					type: 'GET',
+					url: '/assets/scripts/app/data/gridData.json',
+					success: function(data) {
+						setData(data, checkData)
+					}
+				})
+			})();
+
+			var setData = function(data, callback) {
+				if (data && data.pages[page].gridItems) {
 					var compiledHTML = _.template( $('#grid-template').html() )
 				}
 
-				$('.grid .container').append(compiledHTML(data))
+				$('.grid .container').append(compiledHTML(data.pages[page]))
 
+				callback();
+
+			}
+
+			var checkData = function() {
+
+				$('.js-background-image').each(function() {
+					var backgroundImage = new Portfolio.backgroundImage(this, $);
+				});
 
 				var gridItems = document.querySelectorAll('.grid__item');
 				var observer = new FontFaceObserver('Aller');
@@ -45,12 +63,9 @@ var Grid = (function() {
 					});
 				});
 			}
-		})
-	}
-	getData()
 
 
-	return {
+		},
 
 		//Show Grid items using a staggered effect
 		// @public
@@ -104,7 +119,7 @@ var Grid = (function() {
 
 
 })();
-
+Grid.load('hello')
 
 		
 

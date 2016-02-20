@@ -24,6 +24,7 @@
     this.$element.css({
       'background-image': 'url(' + source + ')'
     });
+    this.$image.remove()
   };
 
   BackgroundImage.prototype.imageComplete = function(image) {
