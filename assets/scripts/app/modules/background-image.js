@@ -21,8 +21,6 @@
         }
       }
     })
-      
-
   };
 
   // Adds/Replaces background image on the content block
