@@ -63,7 +63,6 @@ BackgroundImage.prototype.replaceBackground = function () {
 
   _.each(this.$image.toArray(), function (img) {
     sources.push('url(' + (img.currentSrc || img.src) + ')');
-    console.log(img);
     $(img).remove();
   });
 
