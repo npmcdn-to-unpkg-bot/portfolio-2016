@@ -7,6 +7,7 @@
 	+shadow(5)
 	position: relative
 	z-index: 1
+	background: map-get($theme-colors, abyss)
 	.blur-filter
 		width: 0
 		height: 0
@@ -40,22 +41,23 @@
 			overflow: visible
 			transition: opacity .5s
 			padding:
-				right: 20%
 				top: 5%
 			letter-spacing: rem(4px)
 			position: relative
-			font:
-				size: map-get($typography, size-med)
-				family: map-get($typography, headline)
-				weight: 300
+			color: white
+			
 			text-transform: uppercase
-			fill: url(#gradient-light)
-			text:nth-child(3)
-				font:
-					size: map-get($typography, size-jumbo)
-					weight: 900
-				letter-spacing: rem(2px)
-				z-index: 1
+			font:
+				size: map-get($typography, size-jumbo)
+				family: map-get($typography, headline)
+				weight: 900
+			letter-spacing: rem(2px)
+			z-index: 1
 			opacity: 0
+			span 
+				display: block
+				font:
+					size: map-get($typography, size-med)
+					weight: 300
 			.js-is-page &
 				opacity: 1

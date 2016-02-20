@@ -3,7 +3,6 @@
 		"hello": {
 			"gridItems": [
 				{
-					"text": null,
 					"image": [
 						{
 							"path": "assets/visual/images/min/grid-1.jpg",
@@ -14,13 +13,11 @@
 					"color": null
 				},
 				{
-					"text": "UI",
 					"image": null,
 					"link": null,
 					"color": "#E65100"
 				},
 				{
-					"text": null,
 					"image": [
 						{
 							"path": "assets/visual/svgs/min/icon-js.svg",
@@ -35,7 +32,6 @@
 					"color": null
 				},
 				{
-					"text": null,
 					"image": [
 						{
 							"path": "assets/visual/images/min/grid-4.jpg",
@@ -46,13 +42,11 @@
 					"color": null
 				},
 				{
-					"text": "UX",
 					"image": null,
 					"link": null,
 					"color": "#3B2B4A"
 				},
 				{
-					"text": null,
 					"image": [
 						{
 							"path": "assets/visual/svgs/min/icon-css3.svg",
@@ -67,7 +61,6 @@
 					"color": null
 				},
 				{
-					"text": null,
 					"image": [
 						{
 							"path": "assets/visual/images/min/grid-7.jpg",
@@ -78,13 +71,11 @@
 					"color": null
 				},
 				{
-					"text": "DEV",
 					"image": null,
 					"link": null,
 					"color": "#334E5B"
 				},
 				{
-					"text": null,
 					"image": [
 						{
 							"path": "assets/visual/svgs/min/icon-html5.svg",

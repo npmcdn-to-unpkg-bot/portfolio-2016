@@ -319,7 +319,7 @@ var MainNav = (function () {
 			// @param {Number} delay - How many seconds before the next item
 			// in the animation loop starts it's tween after previous has finished
 			TweenMax.staggerTo(_settings.navItems, _settings.speed, {
-				textIndent: '40px',
+				textIndent: '70px',
 				ease: Back.easeOut.config(1.25)
 			}, .15);
 		},

@@ -31,17 +31,6 @@
 			position: center
 			
 
-		// top: -200px
-		svg 
-			width: 100%
-			height: 100%
-			overflow: visible;
-		text 
-			fill: url(#gradient-light)
-			alignment-baseline: middle
-			text-anchor: middle
-			font-family: map-get($typography, headline)
-			font-weight: 900
 		&:hover
 			cursor: pointer
 			//intial scale done with inline styles via js
@@ -55,7 +44,10 @@
 			width: 20vh
 			overflow: hidden
 			&:after
-				+long-shadow(text, rgba(0,0,0,.05), 280, false, true, right)
+				width: 100%;
+				height: 100%
+				overflow: visible
+				
 		&:nth-child(1)
 			color: #25d4ff
 			background-size: cover
@@ -64,9 +56,15 @@
 				border-radius: 50%
 				&:after 
 					content: 'Ps'
+					+long-shadow(text, rgba(0,0,0,.05), 280, false, true, right)
 		&:nth-child(2)
 			color: #fff
 			background: #e65100 
+			span
+				&:after 
+					font-family: map-get($typography, headline)
+					font-weight: 900
+					content: 'UI'
 		&:nth-child(3)
 			color: #fff
 			background:
@@ -79,9 +77,15 @@
 				border-radius: 50%
 				&:after 
 					content: 'Ai'
+					+long-shadow(text, rgba(0,0,0,.05), 280, false, true, right)
 		&:nth-child(5)
 			color: #fff
 			background: #3b2b4a
+			span
+				&:after 
+					font-family: map-get($typography, headline)
+					font-weight: 900
+					content: 'UX'
 		&:nth-child(6)
 			color: #fff
 			background-size: 40%, cover
@@ -93,9 +97,16 @@
 				border-radius: 50%
 				&:after 
 					content: 'Ae'
+					+long-shadow(text, rgba(0,0,0,.05), 280, false, true, right)
 		&:nth-child(8)
 			color: #fff
 			background: #334e5b
+			span
+				width: 100%
+				&:after 
+					font-family: map-get($typography, headline)
+					font-weight: 900
+					content: 'DEV'
 		&:nth-child(9)
 			color: #fff
 			background-size: 40%, cover

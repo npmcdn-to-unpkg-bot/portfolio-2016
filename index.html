@@ -63,7 +63,11 @@
 				<div class="star --small"></div>
 				<div class="star --medium"></div>
 				<div class="star --large"></div>
-				<svg class="headline" xmlns="http://www.w3.org/2000/svg">
+				<h1 class="headline">
+					<span>Digital</span>
+					Creative
+				</h1>
+				<!-- <svg class="headline" xmlns="http://www.w3.org/2000/svg">
 					<defs>
 						<linearGradient id="gradient-light" x1="0%" y1="0%" x2="0%" y2="100%">
 							<stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
@@ -72,7 +76,7 @@
 					</defs>
 					<text y="1.2em">digital</text>
 					<text y="1.6em">creative</text>
-				</svg>
+				</svg> -->
 			</div>
 		</section>
 		<section class="grid">
@@ -101,15 +105,7 @@
 					<% }) 
 					
 				} %>
-				<span>
-					<% if (item.text) { %>
-						<svg viewbox="0,0,200,200">
-							<text y="50%" x="50%">
-								<%= item.text %>
-							</text>
-						</svg>
-					<% } %>
-				</span>
+				<span></span>
 			</div>
 		<% }) %>
 	<% } %>
