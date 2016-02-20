@@ -34,29 +34,43 @@
 'use strict';
 
 var BackgroundImage = function BackgroundImage(element, $) {
+  var that = this;
   this.$element = $(element);
   this.$image = this.$element.find('img');
 
-  if (this.$image.length) {
-    // Check if image has already loaded and replace background immediately
-    if (this.imageComplete(this.$image[0])) {
-      this.replaceBackground();
+  _.each(this.$image.toArray(), function (img) {
+
+    if (img) {
+      // Check if image has already loaded and replace background immediately
+      if (that.imageComplete(img)) {
+        that.replaceBackground();
+      } else {
+        var img = $(img);
+        // Otherwise wait for image load
+        img.on('load', (function () {
+          that.replaceBackground();
+        }).bind(that));
+      }
     }
-    // Otherwise wait for image load
-    this.$image.on('load', (function () {
-      this.replaceBackground();
-    }).bind(this));
-  }
+  });
 };
 
 // Adds/Replaces background image on the content block
 // from the hidden image picturefill loads.
 BackgroundImage.prototype.replaceBackground = function () {
-  var source = this.$image[0].currentSrc || this.$image[0].src;
-  this.$element.css({
-    'background-image': 'url(' + source + ')'
+  var that = this;
+  var sources = [];
+
+  _.each(this.$image.toArray(), function (img) {
+    sources.push('url(' + (img.currentSrc || img.src) + ')');
+    img.remove();
   });
-  this.$image.remove();
+
+  console.log(sources);
+
+  that.$element.css({
+    'background-image': sources
+  });
 };
 
 BackgroundImage.prototype.imageComplete = function (image) {
@@ -128,6 +142,18 @@ var Grid = (function () {
 
 	return {
 
+		// @TODO
+		// This could probably be refactored
+		// Just doesn't seem that good
+
+		// Grid.load
+		// @public
+		// @description:
+		// 		Get the data the relates to the given page string
+		//		Add the data to the underscore template
+		// 		Check to make sure everything is okay
+		// 		Show the new grid
+		// @param {String} page - The page data you want to load
 		load: function load(page) {
 
 			var getData = (function () {
@@ -140,6 +166,11 @@ var Grid = (function () {
 				});
 			})();
 
+			// If we have have data
+			// set the data in against our underscore template
+			// then append the data to our grid container
+			// @param {JSON} data - The data that we want to show
+			// @param {Function} - Callback
 			var setData = function setData(data, callback) {
 				if (data && data.pages[page].gridItems) {
 					var compiledHTML = _.template($('#grid-template').html());
@@ -152,6 +183,9 @@ var Grid = (function () {
 
 			var checkData = function checkData() {
 
+				// If our data contained an image
+				// replace the <img> with a background instance
+				// and then remove the <img>
 				$('.js-background-image').each(function () {
 					var backgroundImage = new Portfolio.backgroundImage(this, $);
 				});

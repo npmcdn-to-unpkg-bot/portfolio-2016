@@ -2,29 +2,46 @@
   // Constructor for adding background images to
   // content blocks
   var BackgroundImage = function(element, $) {
+    var that = this
     this.$element = $(element);
     this.$image = this.$element.find('img');
 
-    if (this.$image.length) {
-      // Check if image has already loaded and replace background immediately
-      if (this.imageComplete(this.$image[0]) ) {
-        this.replaceBackground();
+    _.each(this.$image.toArray(), function(img) {
+
+      if (img) {
+        // Check if image has already loaded and replace background immediately
+        if (that.imageComplete(img) ) {
+          that.replaceBackground();
+        } else {
+          var img = $(img)
+          // Otherwise wait for image load
+          img.on('load', function() {          
+            that.replaceBackground();
+          }.bind(that));
+        }
       }
-      // Otherwise wait for image load
-      this.$image.on('load', function() {
-        this.replaceBackground();
-      }.bind(this));
-    }
+    })
+      
+
   };
 
   // Adds/Replaces background image on the content block
   // from the hidden image picturefill loads.
   BackgroundImage.prototype.replaceBackground = function() {
-    var source = this.$image[0].currentSrc || this.$image[0].src;
-    this.$element.css({
-      'background-image': 'url(' + source + ')'
+    var that = this;
+    var sources = [];
+
+    _.each(this.$image.toArray(), function(img) {
+      sources.push('url(' + (img.currentSrc || img.src) + ')');
+      img.remove()
+    })
+
+    console.log(sources)
+
+    that.$element.css({
+      'background-image': sources
     });
-    this.$image.remove()
+    
   };
 
   BackgroundImage.prototype.imageComplete = function(image) {

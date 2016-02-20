@@ -12,10 +12,20 @@ var Grid = (function() {
 		gridItems: '.grid__item'
 	}
 
-
-
 	return {
 
+		// @TODO
+		// This could probably be refactored
+		// Just doesn't seem that good
+
+		// Grid.load
+		// @public
+		// @description:
+		// 		Get the data the relates to the given page string
+		//		Add the data to the underscore template
+		// 		Check to make sure everything is okay
+		// 		Show the new grid
+		// @param {String} page - The page data you want to load
 		load: function(page) {
 
 			var getData = (function() {
@@ -28,6 +38,12 @@ var Grid = (function() {
 				})
 			})();
 
+
+			// If we have have data 
+			// set the data in against our underscore template
+			// then append the data to our grid container
+			// @param {JSON} data - The data that we want to show
+			// @param {Function} - Callback 
 			var setData = function(data, callback) {
 				if (data && data.pages[page].gridItems) {
 					var compiledHTML = _.template( $('#grid-template').html() )
@@ -41,6 +57,9 @@ var Grid = (function() {
 
 			var checkData = function() {
 
+				// If our data contained an image
+				// replace the <img> with a background instance 
+				// and then remove the <img>
 				$('.js-background-image').each(function() {
 					var backgroundImage = new Portfolio.backgroundImage(this, $);
 				});

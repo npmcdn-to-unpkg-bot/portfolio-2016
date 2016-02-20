@@ -121,16 +121,7 @@
 
 			if (item.image) {
 				classes = 'js-background-image';
-
-				if (item.image.type === 'svg') {
-					imagePath = 'assets/visual/svgs/min/';
-				} else {
-					imagePath = 'assets/visual/images/min/';
-				}
 			} 
-
-			
-
 			%>
 			<% if (item.color) { %>
 				<div class="grid__item <%= classes %>" style="background-color: <%= item.color %>;">
@@ -138,7 +129,10 @@
 				<div class="grid__item <%= classes %>">
 			<% } %>
 				<% if (item.image) { %>
-					<img src="<%= imagePath + item.image.name %>" alt="">
+					<% _.each(item.image, function(img) { %>
+						<img src="<%= img.path %>" alt="">
+					<% }) %>
+					
 				<% } %>
 				<span>
 					<% if (item.text) { %>
