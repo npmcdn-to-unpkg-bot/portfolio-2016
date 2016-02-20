@@ -20,9 +20,9 @@
 		z-index: 9999
 
 	&--hello
+
 		.bg 
 			transition: all .1s
-			filter: url(../../index.html#blur)
 			position: absolute
 			bottom: -13vh
 			left: -110vh
@@ -31,7 +31,9 @@
 			z-index: 0
 			.js-is-page &
 				filter: none
-
+		@supports (filter: url(../../index.html#blur))
+			.bg 
+				filter: url(../../index.html#blur)
 
 		.headline
 			overflow: visible
