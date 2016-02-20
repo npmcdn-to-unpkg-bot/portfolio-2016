@@ -180,7 +180,7 @@ var Grid = (function () {
 			};
 
 			var checkData = function checkData() {
-
+				var font = 'Aller';
 				// If our data contained an image
 				// replace the <img> with a background instance
 				// and then remove the <img>
@@ -189,7 +189,7 @@ var Grid = (function () {
 				});
 
 				var gridItems = document.querySelectorAll('.grid__item');
-				var observer = new FontFaceObserver('Aller');
+				var observer = new FontFaceObserver(font);
 
 				// check to see that our font-family has been loaded
 				// @see https://github.com/bramstein/fontfaceobserver
@@ -201,6 +201,12 @@ var Grid = (function () {
 					// @param {Array, Element, NodeList, String} elem
 					// @param {Object or Function} options - if function, use as callback
 					// @param {Function} onAlways - callback function
+					imagesLoaded(gridItems, function () {
+						Grid.show();
+					});
+					//On Failure
+				}, function () {
+					console.log(font + ' font failed to load');
 					imagesLoaded(gridItems, function () {
 						Grid.show();
 					});
