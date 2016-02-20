@@ -157,7 +157,7 @@ var Grid = (function () {
 			var getData = (function () {
 				$.ajax({
 					type: 'GET',
-					url: '/assets/scripts/app/data/gridData.json',
+					url: 'assets/scripts/app/data/gridData.json',
 					success: function success(data) {
 						setData(data, checkData);
 					}
@@ -313,7 +313,7 @@ var MainNav = (function () {
 			// @param {Number} delay - How many seconds before the next item
 			// in the animation loop starts it's tween after previous has finished
 			TweenMax.staggerTo(_settings.navItems, _settings.speed, {
-				textIndent: 60,
+				textIndent: '40px',
 				ease: Back.easeOut.config(1.25)
 			}, .15);
 		},
@@ -332,7 +332,7 @@ var MainNav = (function () {
 
 			// Reverse nav stagger
 			TweenMax.staggerTo(_settings.navItems, _settings.speed / 1.5, {
-				textIndent: -400,
+				textIndent: '-400px',
 				ease: Back.easeOut.config(1.25)
 			}, .075);
 		},

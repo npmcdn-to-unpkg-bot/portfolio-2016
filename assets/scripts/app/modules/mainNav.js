@@ -54,7 +54,7 @@ var MainNav = (function() {
 			TweenMax.staggerTo(
 				_settings.navItems,
 				_settings.speed, {
-					textIndent: 60,
+					textIndent: '40px',
 					ease: Back.easeOut.config(1.25)
 				}, .15);
 
@@ -76,7 +76,7 @@ var MainNav = (function() {
 			TweenMax.staggerTo(
 				_settings.navItems,
 				_settings.speed/1.5, {
-					textIndent: -400,
+					textIndent: '-400px',
 					ease: Back.easeOut.config(1.25)
 				}, .075);
 		},
