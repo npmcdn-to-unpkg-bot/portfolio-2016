@@ -72,6 +72,7 @@ config.paths.styles = {
 config.paths.scripts = {
   appDir:  config.paths.base + 'scripts/app/',
   appMain: config.paths.base + 'scripts/app/app.js',
+  appDist: config.paths.base + 'scripts/app/dist/app.js',
   dist:    config.paths.base + 'scripts/dist/',
   custom:  config.paths.base + 'scripts/custom/'
 };

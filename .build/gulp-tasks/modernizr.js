@@ -6,10 +6,10 @@ var paths  = require( '../config' ).paths;
 // Create custom build of Modernizr based on tests that are actually in use
 module.exports = function ( gulp, plugins ) {
   return function () {
-    return gulp.src([ paths.scripts.appMain, paths.styles.stylesMain ])
+    return gulp.src([paths.scripts.appDist, paths.scripts.appMain, paths.styles.stylesMain ])
       .pipe( plugins.modernizr( 'modernizr.custom.min.js', {
         devFile: paths.bower + 'modernizr/modernizr.js',
-        tests: [ 'svg', 'touch' ]
+        tests: [ 'svg', 'touchevents', 'history']
       }))
       .pipe( plugins.uglify() )
       .pipe( gulp.dest( paths.scripts.custom ));
