@@ -10,6 +10,7 @@
   window.Portfolio.pane = require('./modules/pane');
   window.Portfolio.bindEvents = require('./modules/bindEvents');
   window.Portfolio.backgroundImage = require('./modules/background-image');
+  window.Portfolio.load = require('./modules/load');
 
   //global ready function this should be the only time we call ready
   // this will loop through all the elements in the Portfolio and call
@@ -27,7 +28,7 @@
   });
 })(Zepto);
 
-},{"./modules/background-image":2,"./modules/bindEvents":3,"./modules/grid":4,"./modules/mainNav":5,"./modules/pane":6}],2:[function(require,module,exports){
+},{"./modules/background-image":2,"./modules/bindEvents":3,"./modules/grid":4,"./modules/load":5,"./modules/mainNav":6,"./modules/pane":7}],2:[function(require,module,exports){
 
 // Constructor for adding background images to
 // content blocks
@@ -108,11 +109,16 @@ var BindEvents = (function () {
 				if (Portfolio.mainNav.isVisable() && !Portfolio.mainNav.isAnimating) {
 					return;
 				}
-				$('li.active').removeClass('active');
+				$('.active').removeClass('active');
 				$(this).addClass('active');
 				Portfolio.mainNav.hide();
 				Portfolio.pane.updateView(event);
 			});
+
+			// window.addEventListener("popstate", function(event) {
+			//       var page = location.pathname
+			//       Portfolio.load(page, false)
+			// });
 		}
 	};
 })();
@@ -157,7 +163,7 @@ var Grid = (function () {
 			var getData = (function () {
 				$.ajax({
 					type: 'GET',
-					url: 'assets/scripts/app/data/gridData.json',
+					url: 'assets/scripts/app/data/pageData.json',
 					success: function success(data) {
 						setData(data, checkData);
 					}
@@ -263,6 +269,115 @@ Grid.load('hello');
 module.exports = Grid;
 
 },{}],5:[function(require,module,exports){
+// Portfolio.load(page)
+// Loads a requested page
+// Decides whether the page requested
+// needs just a preview pane update
+// a grid update or both
+// @public
+// @param {String} page - the page being requested
+// @param {Boolean} addHistory - Do we need a new history state?
+'use strict';
+
+var Load = (function (page, addHistory) {
+
+	// some default settings to use
+	// throughout this function
+	var _settings = {
+
+		path: {
+			grid: null,
+			page: null
+		},
+		container: {
+			grid: null,
+			page: null
+		}
+
+	};
+
+	// checks to see if the load request
+	// if a page or a grid using $.ajax to
+	// check if the file exists
+	// @private
+	// @returns {Boolean}
+	var _isPageRequest = function _isPageRequest() {
+
+		$.ajax({
+			type: 'GET',
+			url: _settings.path.page + page,
+			success: function success() {
+				return true;
+			},
+			error: function error() {
+				return false;
+			}
+		});
+	};
+
+	// hides the current content
+	// while we do our magic
+	// @private
+	var _hideCurrent = function _hideCurrent() {
+		if (_isPageRequest()) {
+			Portfolio.page.hide();
+		} else {
+			Portfolio.page.hide();
+			Portfolio.grid.hide();
+		}
+	};
+
+	// Does the opposite of _hideCurrent
+	var _showNew = function _showNew() {
+		if (_isPageRequest()) {
+			Portfolio.page.show();
+		} else {
+			Portfolio.page.show();
+			Portfolio.grid.show();
+		}
+	};
+
+	// Uses history API to update our url
+	// @private
+	var _updateURL = function _updateURL() {
+		if (addHistory) {
+			history.pushState(null, null, page);
+		}
+	};
+
+	// Get the data to load into our page
+	// If its successful set the page into the container
+	// and update the url of our portfolio
+	// @private
+	var _getPage = function _getPage() {
+		var path;
+		_isPageRequest() ? path = _settings.path.page : path = _settings.path.grid;
+
+		$.ajax({
+			type: 'GET',
+			url: path + page,
+			success: function success(data) {
+				_setPage(data, _showNew);
+				_updateURL();
+			}
+		});
+	};
+
+	// Insert the HTML data into our container
+	// @private
+	var _setPage = function _setPage(data, callback) {
+		var container;
+		_isPageRequest() ? container = _settings.container.page : container = _settings.container.grid;
+		$(container).html(data);
+	};
+
+	_hideCurrent();
+	_getPage();
+})();
+
+module.exports = Load;
+
+},{}],6:[function(require,module,exports){
 // Object and methods for our main navigation
 // @returns public methods:
 // MainNav.show() - show nav items
@@ -353,7 +468,7 @@ var MainNav = (function () {
 })();
 module.exports = MainNav;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var Pane = (function () {
@@ -383,13 +498,19 @@ var Pane = (function () {
 	// @private
 	var content = {};
 
+	window.addEventListener("popstate", function (event) {
+		content.href = location.pathname;
+		loadContent();
+	});
+
 	// This updates our content obj
 	// @param {object} event - The event passed from the click handler
 	// @private
 	var setData = function setData(event) {
 
 		// get the data-href attribute from the link
-		var href = $(event.target).data('href');
+		// or the href attribute if data-href isn't present
+		var href = $(event.target).data('href') || $(event.target).attr('href');
 
 		// If we are already on the page requested, just die silently
 		if (_settings.path + href === content.currentURL) {
@@ -398,7 +519,6 @@ var Pane = (function () {
 
 		// the path requested
 		content.href = href;
-
 		// get the current relative path
 		// @example - example.com/path/to/page.html
 		// @returns - /path/to/page.html
@@ -408,7 +528,6 @@ var Pane = (function () {
 	var hideCurrentContent = function hideCurrentContent() {
 
 		var hider = _settings.hider;
-
 		// Hide current content by animating an overlay
 		// @see https://greensock.com/tweenmax
 		// @param {Object || Array} element(s) - The element(s) to add tween to
@@ -442,7 +561,13 @@ var Pane = (function () {
 		});
 	};
 
-	var updateURL = function updateURL() {};
+	var updateURL = function updateURL() {
+		// History API Supported
+		// if (Modernizr.history) { // Can't get 'gulp modernizr to read the test commenting out for now'
+		var url = content.href;
+		history.pushState(null, null, url);
+		// }
+	};
 
 	var showLoadingAnim = function showLoadingAnim() {
 		_settings.loader.show();
@@ -456,13 +581,20 @@ var Pane = (function () {
 	var loadContent = function loadContent() {
 		var data = _settings.path + content.href;
 
-		showLoadingAnim();
+		// If the requested url is root
+		// Send the user to the hello page
+		if (data === _settings.path + '/') {
+			data = _settings.path + 'hello.html';
+		}
+
+		hideCurrentContent();
 
 		_settings.container.load(data, showNewContent);
 	};
 
 	return {
 
+		// Pane.updateView()
 		// Swaps out the current view for the requested view
 		// using JQuery.load and TweenMax for the animations
 		// updates the page url
@@ -470,6 +602,7 @@ var Pane = (function () {
 		updateView: function updateView() {
 			setData(event);
 			hideCurrentContent();
+			updateURL();
 			showLoadingAnim();
 		}
 	};

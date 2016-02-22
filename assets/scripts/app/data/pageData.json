@@ -1,6 +1,7 @@
 {
 	"pages": {
 		"hello": {
+			"url": "/",
 			"gridItems": [
 				{
 					"image": [
@@ -28,7 +29,7 @@
 							"type": "image"
 						}
 					],
-					"link": null,
+					"link": "content/pages/ui.html",
 					"color": null
 				},
 				{
@@ -90,6 +91,26 @@
 					"color": null
 				}
 			]
-		}
+		},
+		"Ui": {
+			"url": "/ui",
+			"gridItems": null,
+			"pageContent": {
+				"subHead": "User Interface Design",
+				"content": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation<\/p>",
+				"button" : {
+					"text": "Checkout UX Designs",
+					"link": "/work"
+				}
+			}
+		},
+		"Ux": {},
+		"Dev": {},
+		"Photoshop": {},
+		"Illustrator": {},
+		"AfterEffects": {},
+		"JavaScript": {},
+		"Css": {},
+		"Html": {}
 	}
 }

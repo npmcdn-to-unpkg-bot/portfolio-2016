@@ -31,7 +31,7 @@ var Grid = (function() {
 			var getData = (function() {
 				$.ajax({
 					type: 'GET',
-					url: 'assets/scripts/app/data/gridData.json',
+					url: 'assets/scripts/app/data/pageData.json',
 					success: function(data) {
 						setData(data, checkData)
 					}

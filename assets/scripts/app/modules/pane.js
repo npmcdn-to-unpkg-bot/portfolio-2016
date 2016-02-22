@@ -21,17 +21,24 @@ var Pane = (function() {
 		speed: .7
 	};
 
+
 	// this will be updated based on the event 
 	// @private
 	var content = {};
+
+	window.addEventListener("popstate", function(event) {
+       content.href = location.pathname
+       loadContent();
+	});
 
 	// This updates our content obj
 	// @param {object} event - The event passed from the click handler
 	// @private
 	var setData = function(event) {
 
-		// get the data-href attribute from the link
-		var href = $(event.target).data('href');
+		// get the data-href attribute from the link 
+		// or the href attribute if data-href isn't present
+		var href = $(event.target).data('href') || $(event.target).attr('href');
 
 		// If we are already on the page requested, just die silently
 		if ( _settings.path + href === content.currentURL ) {
@@ -40,7 +47,6 @@ var Pane = (function() {
 
 		// the path requested
 		content.href = href
-
 		// get the current relative path
 		// @example - example.com/path/to/page.html
 		// @returns - /path/to/page.html
@@ -51,7 +57,6 @@ var Pane = (function() {
 	var hideCurrentContent = function() {
 
 		var hider = _settings.hider;
-
 		// Hide current content by animating an overlay
 		// @see https://greensock.com/tweenmax
 		// @param {Object || Array} element(s) - The element(s) to add tween to
@@ -89,7 +94,15 @@ var Pane = (function() {
 			});
 	}
 
-	var updateURL = function() {}
+	var updateURL = function() {
+		// History API Supported 
+		// if (Modernizr.history) { // Can't get 'gulp modernizr to read the test commenting out for now'
+			var url = content.href
+			history.pushState(null , null, url)
+		// }
+
+
+	}
 
 	var showLoadingAnim = function() {
 		_settings.loader.show()
@@ -103,13 +116,20 @@ var Pane = (function() {
 	var loadContent = function() {
 		var data = _settings.path + content.href;
 
-		showLoadingAnim();
+		// If the requested url is root
+		// Send the user to the hello page
+		if (data === _settings.path + '/') {
+			data = _settings.path + 'hello.html';
+		}
+
+		hideCurrentContent();
 		
 		_settings.container.load(data, showNewContent)
 	}
 
 	return {
 
+		// Pane.updateView()
 		// Swaps out the current view for the requested view
 		// using JQuery.load and TweenMax for the animations
 		// updates the page url
@@ -117,10 +137,10 @@ var Pane = (function() {
 		updateView: function() {
 			setData(event);
 			hideCurrentContent();
+			updateURL();
 			showLoadingAnim();
 		}
 	}
-
 
 })();	
 module.exports = Pane;

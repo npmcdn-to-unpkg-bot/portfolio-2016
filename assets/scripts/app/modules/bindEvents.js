@@ -10,11 +10,18 @@ var BindEvents = (function() {
 				if ( Portfolio.mainNav.isVisable() && !Portfolio.mainNav.isAnimating ) {
 					return
 				}
-				$('li.active').removeClass('active');
+				$('.active').removeClass('active');
 				$(this).addClass('active');
 				Portfolio.mainNav.hide();
 				Portfolio.pane.updateView(event);
 			})
+
+			// window.addEventListener("popstate", function(event) {
+		 //       var page = location.pathname
+		 //       Portfolio.load(page, false)
+			// });
+
+
 
 		}
 	}
