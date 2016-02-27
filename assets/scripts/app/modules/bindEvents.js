@@ -16,13 +16,6 @@ var BindEvents = (function() {
 				Portfolio.pane.updateView(event);
 			})
 
-			// window.addEventListener("popstate", function(event) {
-		 //       var page = location.pathname
-		 //       Portfolio.load(page, false)
-			// });
-
-
-
 		}
 	}
 

@@ -7,7 +7,8 @@
   window.Portfolio.pane = require('./modules/pane');
   window.Portfolio.bindEvents = require('./modules/bindEvents');
   window.Portfolio.backgroundImage = require('./modules/background-image');
-  window.Portfolio.load = require('./modules/load');
+  // window.Portfolio.load = require('./modules/load');
+  window.Portfolio.load = require('./modules/loader');
 
 
 

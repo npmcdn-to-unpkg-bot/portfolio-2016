@@ -10,7 +10,8 @@
   window.Portfolio.pane = require('./modules/pane');
   window.Portfolio.bindEvents = require('./modules/bindEvents');
   window.Portfolio.backgroundImage = require('./modules/background-image');
-  window.Portfolio.load = require('./modules/load');
+  // window.Portfolio.load = require('./modules/load');
+  window.Portfolio.load = require('./modules/loader');
 
   //global ready function this should be the only time we call ready
   // this will loop through all the elements in the Portfolio and call
@@ -28,7 +29,7 @@
   });
 })(Zepto);
 
-},{"./modules/background-image":2,"./modules/bindEvents":3,"./modules/grid":4,"./modules/load":5,"./modules/mainNav":6,"./modules/pane":7}],2:[function(require,module,exports){
+},{"./modules/background-image":2,"./modules/bindEvents":3,"./modules/grid":4,"./modules/loader":5,"./modules/mainNav":6,"./modules/pane":7}],2:[function(require,module,exports){
 
 // Constructor for adding background images to
 // content blocks
@@ -114,11 +115,6 @@ var BindEvents = (function () {
 				Portfolio.mainNav.hide();
 				Portfolio.pane.updateView(event);
 			});
-
-			// window.addEventListener("popstate", function(event) {
-			//       var page = location.pathname
-			//       Portfolio.load(page, false)
-			// });
 		}
 	};
 })();
@@ -269,113 +265,26 @@ Grid.load('hello');
 module.exports = Grid;
 
 },{}],5:[function(require,module,exports){
-// Portfolio.load(page)
-// Loads a requested page
-// Decides whether the page requested
-// needs just a preview pane update
-// a grid update or both
-// @public
-// @param {String} page - the page being requested
-// @param {Boolean} addHistory - Do we need a new history state?
+/*
+Portfolio.Loader.fetch({
+	page: 'home.html',
+	grid: true
+})
+*/
+
 'use strict';
 
-var Load = (function (page, addHistory) {
+var Loader = (function () {
 
-	// some default settings to use
-	// throughout this function
-	var _settings = {
-
-		path: {
-			grid: null,
-			page: null
-		},
-		container: {
-			grid: null,
-			page: null
-		}
-
+	return {
+		fetch: function fetch(data) {}
 	};
-
-	// checks to see if the load request
-	// if a page or a grid using $.ajax to
-	// check if the file exists
-	// @private
-	// @returns {Boolean}
-	var _isPageRequest = function _isPageRequest() {
-
-		$.ajax({
-			type: 'GET',
-			url: _settings.path.page + page,
-			success: function success() {
-				return true;
-			},
-			error: function error() {
-				return false;
-			}
-		});
-	};
-
-	// hides the current content
-	// while we do our magic
-	// @private
-	var _hideCurrent = function _hideCurrent() {
-		if (_isPageRequest()) {
-			Portfolio.page.hide();
-		} else {
-			Portfolio.page.hide();
-			Portfolio.grid.hide();
-		}
-	};
-
-	// Does the opposite of _hideCurrent
-	var _showNew = function _showNew() {
-		if (_isPageRequest()) {
-			Portfolio.page.show();
-		} else {
-			Portfolio.page.show();
-			Portfolio.grid.show();
-		}
-	};
-
-	// Uses history API to update our url
-	// @private
-	var _updateURL = function _updateURL() {
-		if (addHistory) {
-			history.pushState(null, null, page);
-		}
-	};
-
-	// Get the data to load into our page
-	// If its successful set the page into the container
-	// and update the url of our portfolio
-	// @private
-	var _getPage = function _getPage() {
-		var path;
-		_isPageRequest() ? path = _settings.path.page : path = _settings.path.grid;
-
-		$.ajax({
-			type: 'GET',
-			url: path + page,
-			success: function success(data) {
-				_setPage(data, _showNew);
-				_updateURL();
-			}
-		});
-	};
-
-	// Insert the HTML data into our container
-	// @private
-	var _setPage = function _setPage(data, callback) {
-		var container;
-		_isPageRequest() ? container = _settings.container.page : container = _settings.container.grid;
-		$(container).html(data);
-	};
-
-	_hideCurrent();
-	_getPage();
 })();
 
-module.exports = Load;
+Loader.fetch({
+	url: 'content/hello.html',
+	grid: true
+});
 
 },{}],6:[function(require,module,exports){
 // Object and methods for our main navigation
